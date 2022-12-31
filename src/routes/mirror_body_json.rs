@@ -6,7 +6,15 @@ pub struct MirrorJson {
     message: String,
 }
 
-pub async fn mirror_body_json(Json(body): Json<MirrorJson>) {
-    dbg!(body);
-    todo!();
+#[derive(Deserialize, Serialize)]
+pub struct MirrorJsonResponse {
+    message: String,
+    message_from_server: String,
+}
+
+pub async fn mirror_body_json(Json(body): Json<MirrorJson>) -> Json<MirrorJsonResponse> {
+    Json(MirrorJsonResponse {
+        message: body.message,
+        message_from_server: "Server".to_owned(),
+    })
 }
