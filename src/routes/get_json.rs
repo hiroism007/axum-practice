@@ -9,9 +9,11 @@ pub struct Data {
 }
 
 pub async fn get_json() -> Json<Data> {
+    let optional_value: Option<&'static str> = option_env!("PORT");
+
     Json(Data {
-        message: "hello".to_owned(),
+        message: optional_value.unwrap_or("8080").to_owned(),
         count: 10,
-        username: "hiro".to_owned(),
+        username: "hiroism007".to_owned(),
     })
 }
