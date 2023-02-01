@@ -1,4 +1,5 @@
 mod always_error;
+mod firestore_response;
 mod get_json;
 mod hello_world;
 mod middleware_message;
@@ -14,6 +15,7 @@ mod set_middleware_custom_header;
 mod validate_with_serde;
 use always_error::always_error;
 use axum::{extract::FromRef, middleware, routing::get, routing::post, Router};
+use firestore_response::firestore_response;
 use get_json::get_json;
 use hello_world::hello_world;
 use hyper::Method;
@@ -65,6 +67,7 @@ pub fn create_routes() -> Router {
         .route("/returns_201", get(returns_201))
         .route("/validate_with_serde", post(validate_with_serde))
         .route("/get_json", get(get_json))
+        .route("/firestore_response", get(firestore_response))
     // 最後にもってくるとそれ以前にある route に効果が及ぶ
     // route の優先度は登録順
 }
